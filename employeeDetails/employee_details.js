@@ -1,9 +1,10 @@
 const employees = [
-  { id: 1, name: 'John Doe', age: 30, department: 'IT', salary: 50000 },
-  { id: 2, name: 'Alice Smith', age: 28, department: 'HR', salary: 45000 },
-  { id: 3, name: 'Bob Johnson', age: 35, department: 'Finance', salary: 60000 },
-  // Add more employee records here
+  { id: 1, name: 'John Doe', age: 30, department: 'IT', salary: 50000, specialization: 'JavaScript' },
+  { id: 2, name: 'Alice Smith', age: 28, department: 'HR', salary: 45000, specialization: 'Recruitment' },
+  { id: 3, name: 'Bob Johnson', age: 35, department: 'Finance', salary: 60000, specialization: 'Accounts' },
+  { id: 4, name: 'Ravi Kumar', age: 27, department: 'IT', salary: 55000, specialization: 'JavaScript' }
 ];
+
 
 // Generate HTML card for each employee
 function generateEmployeeCard(employee) {
@@ -13,10 +14,12 @@ function generateEmployeeCard(employee) {
       <p><strong>Name:</strong> ${employee.name}</p>
       <p><strong>Age:</strong> ${employee.age}</p>
       <p><strong>Department:</strong> ${employee.department}</p>
+      <p><strong>Specialization:</strong> ${employee.specialization}</p>
       <p><strong>Salary:</strong> $${employee.salary}</p>
     </div>
   `;
 }
+
 
 // Display all employees
 function displayEmployees() {
@@ -56,4 +59,12 @@ function searchEmployeeById() {
   } else {
     document.getElementById('employeesDetails').innerHTML = '<p>Please enter a valid numeric ID.</p>';
   }
+}
+
+function displayEmployeesBySpecialization(specialization) {
+  const matched = employees.filter(emp => emp.specialization.toLowerCase() === specialization.toLowerCase());
+  const result = matched.length
+    ? matched.map(generateEmployeeCard).join('')
+    : `<p>No employee found with specialization in ${specialization}.</p>`;
+  document.getElementById('employeesDetails').innerHTML = result;
 }
